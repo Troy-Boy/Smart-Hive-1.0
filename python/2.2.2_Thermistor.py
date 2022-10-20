@@ -17,26 +17,39 @@ def init():
 
 def loop():
 	while True:
-		analogVal = ADC0834.getResult()
+		cel, fah = get_temp_val()
+		print ('Celsius: %.2f C  Fahrenheit: %.2f F' % (cel, fah))
+		time.sleep(2) # takes samples each 2 sec
+
+
+def get_temp_val() -> tuple[float, float]:
+	analogVal = ADC0834.getResult()
+	if not analogVal: # temperature mesure is 0, something is wrong
+		blink_led(LED_PIN) # blink red led
+		print('unable to sample temperature')
+	else:
 		Vr = 5 * float(analogVal) / 255
 		Rt = 10000 * Vr / (5 - Vr)
-		print(Rt)
-		if not Rt:
-			FAIL_FLAG = False
-			blink_led(LED_PIN)
-			print('Unable to get temperature')
-		else:
-			temp = 1/(((math.log(Rt / 10000)) / 3950) + (1 / (273.15+25)))
-			Cel = temp - 273.15
-			Fah = Cel * 1.8 + 32
-			print ('Celsius: %.2f C  Fahrenheit: %.2f F' % (Cel, Fah))
-			time.sleep(2)
+		temp = 1/(((math.log(Rt / 10000)) / 3950) + (1 / (273.15+25)))
+		temp_c = convert_to_c(temp)
+		temp_f = convert_to_f(temp)
+		return temp_c, temp_f
+
+
+def convert_to_c(val: float) -> float:
+	return val - 273.15
+
+
+def convert_to_f(val: float) -> float:
+	return convert_to_c(val) * 1.8 + 32
+
 
 def blink_led(led_pin: int):
 	for _ in range(3):
 		GPIO.output(led_pin, GPIO.LOW) # turn on
 		time.sleep(0.5)
 		GPIO.output(led_pin, GPIO.HIGH) # turn off led
+
 
 def destroy():
 	GPIO.cleanup()
