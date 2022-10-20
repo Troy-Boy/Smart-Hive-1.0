@@ -23,7 +23,7 @@ def loop():
 		print(Rt)
 		if not Rt:
 			FAIL_FLAG = False
-			blink_led()
+			blink_led(LED_PIN)
 			print('Unable to get temperature')
 		else:
 			temp = 1/(((math.log(Rt / 10000)) / 3950) + (1 / (273.15+25)))
