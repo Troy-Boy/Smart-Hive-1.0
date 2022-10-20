@@ -31,7 +31,7 @@ def get_temp_val() -> tuple[float, float]:
 	if not analogVal: # temperature mesure is 0, something is wrong
 		blink_led(LED_PIN) # blink red led
 		print('unable to sample temperature')
-		return ValueError
+		raise ValueError
 	else:
 		Vr = 5 * float(analogVal) / 255
 		Rt = 10000 * Vr / (5 - Vr)
