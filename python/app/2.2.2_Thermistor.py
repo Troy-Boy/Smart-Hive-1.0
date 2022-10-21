@@ -45,8 +45,8 @@ def loop():
 		# print ('Celsius: %.2f C  Fahrenheit: %.2f F' % (cel, fah))
 		deg_sign = u'\N{DEGREE SIGN}'
 		LCD1602.clear()
-		LCD1602.write(0, 0, f'{cel:.2f} {deg_sign}C')
-		LCD1602.write(0, 1, f'{fah:.2f} {deg_sign}f')
+		LCD1602.write(0, 0, f'{cel:.2f}'+'\u0B00'+'C')
+		LCD1602.write(0, 1, f'{fah:.2f}'+'\u0B00'+'f')
 		time.sleep(2) # takes samples each 2 sec
 		LCD1602.clear()
 
