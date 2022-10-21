@@ -1,8 +1,13 @@
 # requires RPi_I2C_driver.py
-import RPi_I2C_driver
 from time import *
 
+from python.app.RPi_I2C_driver import LCD_BLINKOFF, LCD_BLINKON
+
 mylcd = RPi_I2C_driver.lcd()
+
+mylcd.lcd_write(LCD_BLINKON)
+sleep(5)
+mylcd.lcd_write(LCD_BLINKOFF)
 # test 2
 mylcd.lcd_display_string("RPi I2C test", 1)
 mylcd.lcd_display_string(" Custom chars", 2)
