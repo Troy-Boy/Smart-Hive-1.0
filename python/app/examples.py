@@ -1,9 +1,9 @@
 # requires RPi_I2C_driver.py
 from time import *
 
-from python.app.RPi_I2C_driver import LCD_BLINKOFF, LCD_BLINKON
+from python.app.RPi_I2C_driver import *
 
-mylcd = RPi_I2C_driver.lcd()
+mylcd = lcd()
 
 mylcd.lcd_write(LCD_BLINKON)
 sleep(5)
