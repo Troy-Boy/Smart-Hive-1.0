@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import RPi.GPIO as GPIO
+import LCD1602
 import ADC0834
 import time
 import math
