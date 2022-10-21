@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import RPi.GPIO as GPIO
-import ADC0834
 import time
 import math
 import LCD1602
+import ADC0834
 
 
 LED_PIN = 25
