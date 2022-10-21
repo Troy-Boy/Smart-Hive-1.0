@@ -5,9 +5,6 @@ from RPi_I2C_driver import *
 
 mylcd = lcd()
 
-mylcd.lcd_write(LCD_BLINKON)
-sleep(5)
-mylcd.lcd_write(LCD_BLINKOFF)
 # test 2
 mylcd.lcd_display_string("RPi I2C test", 1)
 mylcd.lcd_display_string(" Custom chars", 2)

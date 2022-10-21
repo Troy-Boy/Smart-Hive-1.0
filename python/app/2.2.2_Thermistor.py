@@ -7,6 +7,8 @@ import ADC0834
 import time
 import math
 
+from python.app.RPi_I2C_driver import lcd
+
 LED_PIN = 25
 FAIL_FLAG = False
 
@@ -40,18 +42,23 @@ def loop():
 		except ValueError as e:
 			time.sleep(0.5)
 			continue
-		print ('Celsius: %.2f C  Fahrenheit: %.2f F' % (cel, fah))
+		# print ('Celsius: %.2f C  Fahrenheit: %.2f F' % (cel, fah))
+		deg_sign = u'\N{DEGREE SIGN}'
+		LCD1602.clear()
+		LCD1602.write(0, 0, f'Celsius: {cel} {deg_sign}C')
+		LCD1602.write(0, 1, f'Fahrenheit: {fah} {deg_sign}f')
 		time.sleep(2) # takes samples each 2 sec
 
 
 def get_temp_val() -> tuple[float, float]:
 	analogVal = ADC0834.getResult()
-	if not analogVal: # temperature mesure is 0, something is wrong
+	Vr = 5 * float(analogVal) / 255
+	if not Vr: # temperature mesure is 0, something is wrong
 		blink_led(LED_PIN) # blink red led
-		print('unable to sample temperature')
+		LCD1602.clear()
+		LCD1602.write(3, 0, "Unable to sample temp")
 		raise ValueError
 	else:
-		Vr = 5 * float(analogVal) / 255
 		Rt = 10000 * Vr / (5 - Vr)
 		temp = 1/(((math.log(Rt / 10000)) / 3950) + (1 / (273.15+25)))
 		temp_c = convert_to_c(temp)
