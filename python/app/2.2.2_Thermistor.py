@@ -7,7 +7,6 @@ import ADC0834
 import time
 import math
 
-from python.app.RPi_I2C_driver import lcd
 
 LED_PIN = 25
 FAIL_FLAG = False
@@ -48,6 +47,7 @@ def loop():
 		LCD1602.write(0, 0, f'Celsius: {cel} {deg_sign}C')
 		LCD1602.write(0, 1, f'Fahrenheit: {fah} {deg_sign}f')
 		time.sleep(2) # takes samples each 2 sec
+		LCD1602.clear()
 
 
 def get_temp_val() -> tuple[float, float]:
