@@ -87,16 +87,16 @@ pauza = 0.2 # define duration of sleep(x)
 # now draw cust. chars starting from col. 7 (pos. 6)
 
 pos = 6
-mylcd.lcd_display_string_pos(unichr(1),1,6)
+mylcd.lcd_display_string_pos(chr(1),1,6)
 sleep(pauza)
 
-mylcd.lcd_display_string_pos(unichr(2),1,pos)
+mylcd.lcd_display_string_pos(chr(2),1,pos)
 sleep(pauza)
 
-mylcd.lcd_display_string_pos(unichr(3),1,pos)
+mylcd.lcd_display_string_pos(chr(3),1,pos)
 sleep(pauza)
 
-mylcd.lcd_display_string_pos(unichr(4),1,pos)
+mylcd.lcd_display_string_pos(chr(4),1,pos)
 sleep(pauza)
 
 mylcd.lcd_display_string_pos(block,1,pos)
@@ -105,13 +105,13 @@ sleep(pauza)
 # and another one, same as above, 1 char-space to the right
 pos = pos +1 # increase column by one
 
-mylcd.lcd_display_string_pos(unichr(1),1,pos)
+mylcd.lcd_display_string_pos(chr(1),1,pos)
 sleep(pauza)
-mylcd.lcd_display_string_pos(unichr(2),1,pos)
+mylcd.lcd_display_string_pos(chr(2),1,pos)
 sleep(pauza)
-mylcd.lcd_display_string_pos(unichr(3),1,pos)
+mylcd.lcd_display_string_pos(chr(3),1,pos)
 sleep(pauza)
-mylcd.lcd_display_string_pos(unichr(4),1,pos)
+mylcd.lcd_display_string_pos(chr(4),1,pos)
 sleep(pauza)
 mylcd.lcd_display_string_pos(block,1,pos)
 sleep(pauza)
@@ -121,12 +121,12 @@ sleep(pauza)
 # now again load first set of custom chars - smiley
 mylcd.lcd_load_custom_chars(fontdata1)
 
-mylcd.lcd_display_string_pos(unichr(0),1,9)
-mylcd.lcd_display_string_pos(unichr(1),1,10)
-mylcd.lcd_display_string_pos(unichr(2),1,11)
-mylcd.lcd_display_string_pos(unichr(3),2,9)
-mylcd.lcd_display_string_pos(unichr(4),2,10)
-mylcd.lcd_display_string_pos(unichr(5),2,11)
+mylcd.lcd_display_string_pos(chr(0),1,9)
+mylcd.lcd_display_string_pos(chr(1),1,10)
+mylcd.lcd_display_string_pos(chr(2),1,11)
+mylcd.lcd_display_string_pos(chr(3),2,9)
+mylcd.lcd_display_string_pos(chr(4),2,10)
+mylcd.lcd_display_string_pos(chr(5),2,11)
 
 sleep(2)
 mylcd.lcd_clear()

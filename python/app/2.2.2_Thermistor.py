@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import RPi.GPIO as GPIO
+import LCD1602
 import ADC0834
 import time
 import math
@@ -15,19 +16,21 @@ def init():
 	setup_adc0834()
 	setup_lcd1602()
 
+
 def setup_lcd1602():
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
 	LCD1602.write(0, 0, 'Greetings!')
 	LCD1602.write(1, 1, 'From SunFounder')
 	time.sleep(2)
 
+
 def setup_gpio():
 	GPIO.setmode(GPIO.BCM)
 	GPIO.setup(LED_PIN, GPIO.OUT, initial=GPIO.HIGH)
 
+
 def setup_adc0834():
 	ADC0834.setup()
-
 
 
 def loop():
@@ -43,7 +46,6 @@ def loop():
 
 def get_temp_val() -> tuple[float, float]:
 	analogVal = ADC0834.getResult()
-	print(analogVal)
 	if not analogVal: # temperature mesure is 0, something is wrong
 		blink_led(LED_PIN) # blink red led
 		print('unable to sample temperature')
@@ -72,6 +74,7 @@ def blink_led(led_pin: int):
 
 
 def destroy():
+	LCD1602.clear()
 	GPIO.cleanup()
 	ADC0834.destroy()
 
