@@ -28,6 +28,7 @@ def loop():
 
 def get_temp_val() -> tuple[float, float]:
 	analogVal = ADC0834.getResult()
+	print(analogVal)
 	if not analogVal: # temperature mesure is 0, something is wrong
 		blink_led(LED_PIN) # blink red led
 		print('unable to sample temperature')
