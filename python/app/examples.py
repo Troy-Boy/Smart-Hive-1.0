@@ -1,7 +1,7 @@
 # requires RPi_I2C_driver.py
 from time import *
 
-from python.app.RPi_I2C_driver import *
+from RPi_I2C_driver import *
 
 mylcd = lcd()
 
