@@ -115,8 +115,9 @@ def readDht11():
 
 	return the_bytes[0], the_bytes[2]
 
-def main():
 
+def main():
+	print('Hello world!')
 	while True:
 		result = readDht11()
 		if result:
@@ -124,11 +125,16 @@ def main():
 			print ("humidity: %s %%,  Temperature: %s C`" % (humidity, temperature))
 		time.sleep(1)
 
+
+def setup_gpio():
+	GPIO.setmode(GPIO.BCM)
+
+
 def destroy():
 	GPIO.cleanup()
 
+
 if __name__ == '__main__':
-	print('Hello world!')
 	try:
 		main()
 	except KeyboardInterrupt:

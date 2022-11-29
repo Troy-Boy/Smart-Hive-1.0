@@ -1,5 +1,5 @@
 # requires RPi_I2C_driver.py
-from time import *
+import time
 
 from RPi_I2C_driver import *
 
@@ -9,7 +9,7 @@ mylcd = lcd()
 mylcd.lcd_display_string("RPi I2C test", 1)
 mylcd.lcd_display_string(" Custom chars", 2)
 
-sleep(2) # 2 sec delay
+time.sleep(2) # 2 sec delay
 
 mylcd.lcd_clear()
 
@@ -46,14 +46,14 @@ mylcd.lcd_write(0xC0)
 mylcd.lcd_write_char(3)
 mylcd.lcd_write_char(4)
 mylcd.lcd_write_char(5)
-sleep(2)
+time.sleep(2)
 
 mylcd.lcd_clear()
 
 mylcd.lcd_display_string_pos("Testing",1,1) # row 1, column 1
-sleep(1)
+time.sleep(1)
 mylcd.lcd_display_string_pos("Testing",2,3) # row 2, column 3
-sleep(1)
+time.sleep(1)
 mylcd.lcd_clear()
 
 # Now let's define some more custom characters
@@ -84,39 +84,39 @@ block = chr(255) # block character, built-in
 mylcd.lcd_display_string_pos(block * 2,1,4)
 
 # 
-pauza = 0.2 # define duration of sleep(x)
+pause = 0.2 # define duration of time.sleep(x)
 #
 # now draw cust. chars starting from col. 7 (pos. 6)
 
 pos = 6
 mylcd.lcd_display_string_pos(chr(1),1,6)
-sleep(pauza)
+time.sleep(pause)
 
 mylcd.lcd_display_string_pos(chr(2),1,pos)
-sleep(pauza)
+time.sleep(pause)
 
 mylcd.lcd_display_string_pos(chr(3),1,pos)
-sleep(pauza)
+time.sleep(pause)
 
 mylcd.lcd_display_string_pos(chr(4),1,pos)
-sleep(pauza)
+time.sleep(pause)
 
 mylcd.lcd_display_string_pos(block,1,pos)
-sleep(pauza)
+time.sleep(pause)
 
 # and another one, same as above, 1 char-space to the right
 pos = pos +1 # increase column by one
 
 mylcd.lcd_display_string_pos(chr(1),1,pos)
-sleep(pauza)
+time.sleep(pause)
 mylcd.lcd_display_string_pos(chr(2),1,pos)
-sleep(pauza)
+time.sleep(pause)
 mylcd.lcd_display_string_pos(chr(3),1,pos)
-sleep(pauza)
+time.sleep(pause)
 mylcd.lcd_display_string_pos(chr(4),1,pos)
-sleep(pauza)
+time.sleep(pause)
 mylcd.lcd_display_string_pos(block,1,pos)
-sleep(pauza)
+time.sleep(pause)
 
 
 #
@@ -130,7 +130,7 @@ mylcd.lcd_display_string_pos(chr(3),2,9)
 mylcd.lcd_display_string_pos(chr(4),2,10)
 mylcd.lcd_display_string_pos(chr(5),2,11)
 
-sleep(2)
+time.sleep(2)
 mylcd.lcd_clear()
-sleep(1)
+time.sleep(1)
 mylcd.backlight(0)
