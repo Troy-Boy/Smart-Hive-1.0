@@ -118,11 +118,11 @@ def main():
 		result = read_dht11()
 		if result:
 			humidity, temperature = result
-		LCD1602.clear()
-		LCD1602.write(0, 0, f'Humidity: {humidity}%')
-		LCD1602.write(0, 1, f'Temperature: {temperature} C')
-		time.sleep(2) # takes samples each 2 sec
-		LCD1602.clear()
+			LCD1602.clear()
+			LCD1602.write(0, 0, f'Humidity: {humidity}%')
+			LCD1602.write(0, 1, f'Temperature: {temperature} C')
+			time.sleep(2) # takes samples each 2 sec
+			LCD1602.clear()
 
 
 def destroy():
