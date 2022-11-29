@@ -22,20 +22,20 @@ STATE_DATA_PULL_DOWN = 5
 
 
 def init():
-	setup_gpio()
-	setup_adc0834()
-	setup_lcd1602()
-	setup_dht()
+	"""Initialize pins and connected IO."""
+	setup_gpio() # setup pin mode
+	setup_dht() # initialize pin for dht
+	setup_adc0834() # initialize pin for dht
+	setup_lcd1602() # initialize pin for dht
 
 
 def setup_dht():
 	GPIO.setup(DHT_PIN, GPIO.OUT)
 	GPIO.output(DHT_PIN, GPIO.HIGH)
-	time.sleep(0.05)
-	# GPIO.output(DHT_PIN, GPIO.LOW)
-	# time.sleep(0.02)
-	# GPIO.setup(DHT_PIN, GPIO.IN, GPIO.PUD_UP)
-
+	time.sleep(0.1)
+	GPIO.output(DHT_PIN, GPIO.LOW)
+	time.sleep(0.02)
+	GPIO.setup(DHT_PIN, GPIO.IN, GPIO.PUD_UP)
 
 def setup_lcd1602():
 	LCD1602.init(0x27, 1)	# init(slave address, background light)
@@ -46,7 +46,7 @@ def setup_lcd1602():
 
 def setup_gpio():
 	GPIO.setmode(GPIO.BCM)
-	GPIO.setup(LED_PIN, GPIO.OUT, initial=GPIO.HIGH)
+	# GPIO.setup(LED_PIN, GPIO.OUT, initial=GPIO.HIGH)
 
 
 def setup_adc0834():
@@ -73,10 +73,6 @@ def loop():
 
 
 def get_dht_data() -> tuple[list, list]:
-	GPIO.output(DHT_PIN, GPIO.LOW)
-	time.sleep(0.02)
-	GPIO.setup(DHT_PIN, GPIO.IN, GPIO.PUD_UP)
-
 	unchanged_count = 0
 	last = -1
 	data = []
