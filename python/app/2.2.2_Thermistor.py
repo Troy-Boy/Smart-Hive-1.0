@@ -123,7 +123,7 @@ def get_dht_data() -> tuple[list, list]:
 				continue
 	if len(lengths) != 40:
 		#print ("Data not good, skip")
-		return False
+		return (None, None)
 
 	shortest_pull_up = min(lengths)
 	longest_pull_up = max(lengths)
@@ -151,7 +151,7 @@ def get_dht_data() -> tuple[list, list]:
 	checksum = (the_bytes[0] + the_bytes[1] + the_bytes[2] + the_bytes[3]) & 0xFF
 	if the_bytes[4] != checksum:
 		#print ("Data not good, skip")
-		return False
+		return (None, None)
 
 	return the_bytes[0], the_bytes[2]
 
