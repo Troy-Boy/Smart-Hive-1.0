@@ -57,7 +57,6 @@ def loop():
 	deg_sign = u'\N{DEGREE SIGN}'
 	while True:
 		try:
-			GPIO.output(LED_PIN, GPIO.HIGH)
 			hum, temp = get_dht_data()
 			print(f'Humidity: {hum}%, Temp: {temp}{deg_sign}C')
 			cel, fah = get_temp_val()
