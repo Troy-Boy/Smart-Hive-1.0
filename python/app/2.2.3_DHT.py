@@ -11,6 +11,8 @@
 #!/usr/bin/env python3
 import RPi.GPIO as GPIO
 import time
+import LCD1602
+
 
 dhtPin = 13
 
@@ -35,7 +37,7 @@ def readDht11():
 	unchanged_count = 0
 	last = -1
 	data = []
-	while True:
+	while unchanged_count < MAX_UNCHANGE_COUNT:
 		current = GPIO.input(dhtPin)
 		data.append(current)
 		if last != current:
@@ -43,8 +45,6 @@ def readDht11():
 			last = current
 		else:
 			unchanged_count += 1
-			if unchanged_count > MAX_UNCHANGE_COUNT:
-				break
 
 	state = STATE_INIT_PULL_DOWN
 
@@ -83,7 +83,7 @@ def readDht11():
 				continue
 	if len(lengths) != 40:
 		#print ("Data not good, skip")
-		return False
+		return (None, None)
 
 	shortest_pull_up = min(lengths)
 	longest_pull_up = max(lengths)
@@ -111,23 +111,20 @@ def readDht11():
 	checksum = (the_bytes[0] + the_bytes[1] + the_bytes[2] + the_bytes[3]) & 0xFF
 	if the_bytes[4] != checksum:
 		#print ("Data not good, skip")
-		return False
+		return (None, None)
 
 	return the_bytes[0], the_bytes[2]
 
 
 def main():
 	print('Hello world!')
+
 	while True:
 		result = readDht11()
 		if result:
 			humidity, temperature = result
 			print ("humidity: %s %%,  Temperature: %s C`" % (humidity, temperature))
 		time.sleep(1)
-
-
-def setup_gpio():
-	GPIO.setmode(GPIO.BCM)
 
 
 def destroy():
