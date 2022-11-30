@@ -43,6 +43,7 @@ STATE_DATA_FIRST_PULL_DOWN = 3
 STATE_DATA_PULL_UP = 4
 STATE_DATA_PULL_DOWN = 5
 
+
 def read_dht11():
 	GPIO.setup(dhtPin, GPIO.OUT)
 	GPIO.output(dhtPin, GPIO.HIGH)
@@ -194,10 +195,11 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     daemon_threads = True
 
 
+output = StreamingOutput()
+
 def main():
 	setup_lcd1602()	
 	with picamera.PiCamera(resolution='640x480', framerate=24) as camera:
-		output = StreamingOutput()
 		#Uncomment the next line to change your Pi's Camera rotation (in degrees)
 		#camera.rotation = 90
 		camera.start_recording(output, format='mjpeg')
